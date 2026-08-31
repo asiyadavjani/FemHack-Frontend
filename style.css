@@ -379,6 +379,7 @@ body {
   height: 480px;
   perspective: 1200px;
   font-family: inherit;
+  perspective: 1000px; /* 3D effect ke liye */
   margin: 0 auto;
 }
 
@@ -403,6 +404,10 @@ body {
   border: 1px solid rgba(255, 87, 34, 0.25);
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+/* Hover par flip hona */
+.qs-flip-card:hover .qs-card-inner {
+  transform: rotateY(180deg);
 }
 
 /* FRONT DESIGN */

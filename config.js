@@ -1,27 +1,28 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { 
   getAuth, 
+  onAuthStateChanged, 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
-  GoogleAuthProvider, 
-  signInWithPopup, 
-  signOut, 
   sendEmailVerification, 
-  sendPasswordResetEmail, 
-  updatePassword, 
-  onAuthStateChanged,
-  verifyBeforeUpdateEmail 
-} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
+  signOut 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import { 
   getFirestore, 
-  setDoc, 
   doc, 
+  setDoc, 
   getDoc, 
+  addDoc, 
+  collection, 
+  query, 
+  where, 
+  onSnapshot, 
   updateDoc, 
   serverTimestamp 
-} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// Aapki Firebase Configuration Credentials
 const firebaseConfig = {
   apiKey: "AIzaSyBWgwMBxUcLqFy1H5qOvytHBvOCo04jYXo",
   authDomain: "femhack-frontend.firebaseapp.com",
@@ -31,26 +32,28 @@ const firebaseConfig = {
   appId: "1:977125930646:web:adacdcd02f2df3087db4b7"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Single Clean Export Block
 export {
   auth,
   db,
+  signOut,
+  onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
   sendEmailVerification,
-  sendPasswordResetEmail,
-  updatePassword,
-  onAuthStateChanged,
-  verifyBeforeUpdateEmail,
-  setDoc,
   doc,
+  setDoc,
   getDoc,
+  addDoc,
+  collection,
+  query,
+  where,
+  onSnapshot,
   updateDoc,
   serverTimestamp
 };

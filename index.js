@@ -1,142 +1,52 @@
-document.addEventListener("DOMContentLoaded", () => {
-  let currentSlide = 0;
-  const slides = document.querySelectorAll(".hero-slide");
-  const prevBtn = document.getElementById("prevSlide");
-  const nextBtn = document.getElementById("nextSlide");
+// document.addEventListener("DOMContentLoaded", () => {
+//   document.addEventListener("click", (e) => {
+//     const bookBtn = e.target.closest(".qs-book-btn");
 
-  if (!slides.length || !prevBtn || !nextBtn) return;
+//     if (bookBtn) {
+//       e.preventDefault();
+      
+//       const card = bookBtn.closest(".card") || bookBtn.closest(".qs-card");
 
-  const totalSlides = slides.length;
+//       const providerData = {
+//         name: bookBtn.getAttribute("data-name") || card?.querySelector("h3, h4, h5")?.innerText?.trim() || "Service Provider",
+//         category: bookBtn.getAttribute("data-category") || bookBtn.getAttribute("data-service") || card?.querySelector(".badge")?.innerText?.trim() || "General Service",
+//         price: bookBtn.getAttribute("data-price") || card?.querySelector(".price, .text-orange")?.innerText?.trim() || "RS 1500/hr",
+//         location: bookBtn.getAttribute("data-location") || "Karachi",
+//         exp: bookBtn.getAttribute("data-exp") || "5+ Yrs"
+//       };
 
-  function animateSlide(slideIndex) {
-    slides.forEach((slide, index) => {
-      if (index === slideIndex) {
-        slide.style.display = "block";
+//       localStorage.setItem("qs_selected_provider", JSON.stringify(providerData));
 
-        gsap.fromTo(
-          slide.querySelector(".slide-title"),
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
-        );
-
-        gsap.fromTo(
-          slide.querySelector(".slide-desc"),
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, delay: 0.15, ease: "power2.out" }
-        );
-
-        gsap.fromTo(
-          slide.querySelector(".slide-btns"),
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, delay: 0.25, ease: "power2.out" }
-        );
-
-        const iconBox = slide.querySelector(".icon-illustration-box");
-        if (iconBox) {
-          gsap.fromTo(
-            iconBox,
-            { scale: 0.6, opacity: 0, rotation: -10 },
-            { scale: 1, opacity: 1, rotation: 0, duration: 0.7, delay: 0.1, ease: "back.out(1.7)" }
-          );
-        }
-
-      } else {
-        slide.style.display = "none";
-      }
-    });
-  }
-
-  nextBtn.addEventListener("click", () => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    animateSlide(currentSlide);
-  });
-
-  prevBtn.addEventListener("click", () => {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    animateSlide(currentSlide);
-  });
-
-  setInterval(() => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    animateSlide(currentSlide);
-  }, 6000);
-
-  animateSlide(0);
-});
+//       const params = new URLSearchParams(providerData).toString();
+//       window.location.href = `./bookservice.html?${params}`;
+//     }
+//   });
+// });
 
 
 
-
-
-
-
-
-
-
-
-
-// cardsssssssssssssssssssssss
-
-
-
-// CDN Required: <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll(".qs-flip-card");
+  document.addEventListener("click", (e) => {
+    // Check if clicked element is book button
+    const bookBtn = e.target.closest(".qs-book-btn");
+    if (!bookBtn) return;
 
-  cards.forEach((card) => {
-    const cardInner = card.querySelector(".qs-card-inner");
+    e.preventDefault();
 
-    // Initialize 3D perspective
-    gsap.set(cardInner, { transformStyle: "preserve-3d" });
+    // Data collect from button attributes
+    const providerData = {
+      name: bookBtn.getAttribute("data-name") || "Bilal Khan",
+      category: bookBtn.getAttribute("data-category") || "AC & Cooling Expert",
+      price: bookBtn.getAttribute("data-price") || "RS 2000/hr",
+      location: bookBtn.getAttribute("data-location") || "Islamabad",
+      exp: bookBtn.getAttribute("data-exp") || "5+ Yrs",
+      avatar: bookBtn.getAttribute("data-avatar") || ""
+    };
 
-    // Flip to back side on mouse enter
-    card.addEventListener("mouseenter", () => {
-      gsap.to(cardInner, {
-        rotateY: 180,
-        duration: 0.7,
-        ease: "power2.inOut"
-      });
-    });
-
-    // Flip back to front side on mouse leave
-    card.addEventListener("mouseleave", () => {
-      gsap.to(cardInner, {
-        rotateY: 0,
-        duration: 0.7,
-        ease: "power2.inOut"
-      });
-    });
+    // Save & Redirect
+    localStorage.setItem("qs_selected_provider", JSON.stringify(providerData));
+    const params = new URLSearchParams(providerData).toString();
+    window.location.href = `./bookservice.html?${params}`;
   });
 });
-
-
-
-
-
-
-
-// cards endddddddddddddddddddddddddddddddddddd
-
-
-
-// footer
-const backToTopBtn = document.getElementById("backToTopBtn");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTopBtn.classList.add("show");
-  } else {
-    backToTopBtn.classList.remove("show");
-  }
-});
-
-backToTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-});
-
-
-// footer end

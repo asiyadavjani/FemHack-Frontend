@@ -2,12 +2,10 @@ import {
   auth, 
   db, 
   signInWithEmailAndPassword, 
-  GoogleAuthProvider, 
-  signInWithPopup, 
-  getDoc, 
   doc, 
-  setDoc, 
-  serverTimestamp 
+  getDoc,
+  setDoc,
+  serverTimestamp
 } from "./config.js";
 
 const loginForm = document.getElementById('loginForm');
@@ -19,69 +17,46 @@ if (loginForm) {
     const email = document.getElementById('loginEmail')?.value.trim();
     const password = document.getElementById('loginPassword')?.value;
 
-    if (!email || !password) {
-      alert("Please enter both email and password.");
-      return;
-    }
-
     try {
+      console.log("1. Logging in...");
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      console.log("2. Logged in UID:", user.uid);
 
-      // Firestore se user ka role check karein
+      console.log("3. Fetching user document from Firestore...");
       const userDocRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userDocRef);
+      let userSnap = await getDoc(userDocRef);
 
-      alert("Logged in successfully!");
+      // Agar Firestore mein user doc na mile (Naya Customer)
+      if (!userSnap.exists()) {
+        console.warn("4. No document found! Creating default customer document...");
+        
+        const newUserData = {
+          uid: user.uid,
+          email: user.email,
+          name: user.displayName || user.email.split('@')[0],
+          role: 'customer',
+          createdAt: serverTimestamp()
+        };
 
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-        if (userData.role === 'provider') {
-          window.location.href = './provider-dashboard.html';
-        } else {
-          window.location.href = './index.html';
-        }
+        await setDoc(userDocRef, newUserData);
+        userSnap = await getDoc(userDocRef); // Fresh snap reload
+      }
+
+      const data = userSnap.data();
+      console.log("5. User Data found:", data);
+
+      if (data && data.role === 'provider') {
+        console.log("6. Role is provider. Redirecting to provider.html...");
+        window.location.href = './provider.html';
       } else {
+        console.log("6. Role is customer. Redirecting to index.html...");
         window.location.href = './index.html';
       }
 
     } catch (error) {
       console.error("Login Error:", error);
-      alert(error.message);
-    }
-  });
-}
-
-// Google Sign-In Integration
-const googleBtn = document.getElementById('googleLoginBtn');
-if (googleBtn) {
-  googleBtn.addEventListener('click', async () => {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: 'select_account' });
-
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      const userDocRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userDocRef);
-
-      // Agar new Google User ho to Firestore document create karein
-      if (!userSnap.exists()) {
-        await setDoc(userDocRef, {
-          uid: user.uid,
-          name: user.displayName || '',
-          email: user.email,
-          role: 'user',
-          profileImg: user.photoURL || '',
-          createdAt: serverTimestamp()
-        });
-      }
-
-      window.location.href = './index.html';
-    } catch (error) {
-      console.error("Google Auth Error:", error);
-      alert(error.message);
+      alert("Error: " + error.message);
     }
   });
 }

@@ -4,22 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickServe - On-Demand Services</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-    <!-- Custom CSS -->
-     <link rel="stylesheet" href="./auth.css">
+    <link rel="stylesheet" href="./auth.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top quickserve-navbar py-2">
       <div class="container-fluid px-md-5 d-flex align-items-center justify-content-between">
-        
-        <!-- Logo -->
         <a href="./index.html" class="brand-logo-container order-1">
           <div class="brand-icon-box">
             <i class="bi bi-lightning-charge-fill text-white fs-4"></i>
@@ -30,13 +23,10 @@
           </div>
         </a>
 
-        <!-- Search & Filter -->
         <div class="mx-auto order-2 header-center-search my-2 my-lg-0" style="width: 44%; min-width: 320px;">
           <div class="input-group search-container">
             <input type="text" id="searchBar" class="form-control ps-3" placeholder="Search service (e.g. Electrician, Plumber)...">
-            
             <div class="search-divider d-none d-sm-block"></div>
-            
             <select id="categoryFilter" class="form-select px-2 d-none d-sm-block" style="max-width: 145px;">
               <option value="all">All Category</option>
               <option value="plumbing">Plumbing</option>
@@ -44,36 +34,27 @@
               <option value="cleaning">Cleaning</option>
               <option value="carpenter">Carpenter</option>
             </select>
-            
             <button class="btn btn-search-trigger" type="button" id="searchBtn">
               <i class="bi bi-search"></i>
             </button>
           </div>
         </div>
 
-        <!-- Right Controls -->
         <div class="d-flex align-items-center order-3 header-right-side gap-3">
             <a href="#services" class="nav-link-custom active d-none d-xl-inline">Services</a>
-          <a href="#" id="dashboardNavBtn" class="nav-link-custom d-none d-md-inline">Dashboard</a>
-         
-<a href="./login.html" class="btn btn-orange-pill text-decoration-none" id="authBtn">
-  <i class="bi bi-box-arrow-in-right me-1"></i> Login
-</a>
-<a href="./signup.html" class="btn btn-orange-pill text-decoration-none" id="signupBtn">
-  Signup
-</a>
-
+          <a href="./customer-dashboard.html" id="dashboardNavBtn" class="nav-link-custom d-none d-md-inline">Dashboard</a>
+          <a href="./login.html" class="btn btn-orange-pill text-decoration-none" id="authBtn">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+          </a>
+          <a href="./signup.html" class="btn btn-orange-pill text-decoration-none" id="signupBtn">
+            Signup
+          </a>
       </div>
     </nav>
 
-    <!-- Main Container -->
     <main class="container py-4" id="app">
-        
-<!-- ///slider start -->
-<!-- HIGH-FI HERO SLIDER -->
+
 <div class="hero-slider-wrapper my-4">
-  
-  <!-- Slide 1 -->
   <div class="hero-slide">
     <div class="row align-items-center h-100 px-4 px-md-5 py-4">
       <div class="col-lg-8 slide-content ms-md-2">
@@ -99,7 +80,6 @@
     </div>
   </div>
 
-  <!-- Slide 2 -->
   <div class="hero-slide">
     <div class="row align-items-center h-100 px-4 px-md-5 py-4">
       <div class="col-lg-8 slide-content ms-md-2">
@@ -124,7 +104,6 @@
     </div>
   </div>
 
-  <!-- Slider Navigation Controls -->
   <div class="slider-controls">
     <button class="slider-btn" id="prevSlide" type="button" aria-label="Previous Slide">
       <i class="bi bi-arrow-left"></i>
@@ -133,33 +112,12 @@
       <i class="bi bi-arrow-right"></i>
     </button>
   </div>
-
 </div>
 
-<!-- slider end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- cards start -->
-
-
 <div class="container py-5" id="services">
-  <div class="row g-4" id="providers-container" id="services">
+  <div class="row g-4" id="providers-container">
 
-    <!-- 1. Electrical Pro -->
+    <!-- Card 1: Ali Raza -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -184,7 +142,10 @@
               <p class="qs-short-desc">Short-circuit repair, wiring, breaker fixes & heavy installation.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Ali Raza" data-category="Master Electrician" data-price="RS 1500/hr"
+                  data-location="Karachi" data-exp="6+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -200,14 +161,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Licensed & Verified</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>99% Success Rate</li>
               </ul>
-              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Ali Raza" data-category="Master Electrician" data-price="RS 1500/hr"
+                data-location="Karachi" data-exp="6+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 2. Plumbing Specialist -->
+    <!-- Card 2: Usman Ahmed -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -232,7 +196,10 @@
               <p class="qs-short-desc">Pipe leak repairs, drainage unclogging, and sanitary fitting.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Usman Ahmed" data-category="Plumbing Specialist" data-price="RS 1200/hr"
+                  data-location="Lahore" data-exp="8+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -248,14 +215,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Hydro-Jetting Expert</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Same Day Booking</li>
               </ul>
-              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Usman Ahmed" data-category="Plumbing Specialist" data-price="RS 1200/hr"
+                data-location="Lahore" data-exp="8+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 3. AC Expert -->
+    <!-- Card 3: Bilal Khan -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -279,7 +249,10 @@
               <p class="qs-short-desc">Inverter AC gas refill, master cleaning, and compressor repair.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Bilal Khan" data-category="AC & Cooling Expert" data-price="RS 2000/hr"
+                  data-location="Islamabad" data-exp="5+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -295,14 +268,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Inverter Technology Pro</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>90 Days Gas Warranty</li>
               </ul>
-              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Bilal Khan" data-category="AC & Cooling Expert" data-price="RS 2000/hr"
+                data-location="Islamabad" data-exp="5+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 4. Home Cleaning -->
+    <!-- Card 4: Saima Tariq -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -327,7 +303,10 @@
               <p class="qs-short-desc">Sofa shampooing, deep kitchen wash, and post-renovation cleanup.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Saima Tariq" data-category="Deep Cleaning Pro" data-price="RS 1000/hr"
+                  data-location="Karachi" data-exp="4+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -343,16 +322,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Eco-friendly Products</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Background Checked</li>
               </ul>
-              
-              <button type="button" onclick="localStorage.setItem('qs_selected_provider', JSON.stringify({name:'Saima Tariq', category:'Deep Cleaning Pro', price:'RS 1000/hr', location:'Karachi', exp:'4+ Yrs', avatar:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop'})); window.location.href='bookservice.html';" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
-              
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Saima Tariq" data-category="Deep Cleaning Pro" data-price="RS 1000/hr"
+                data-location="Karachi" data-exp="4+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 5. Carpenter -->
+    <!-- Card 5: Tariq Mahmood -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -376,7 +356,10 @@
               <p class="qs-short-desc">Custom furniture polish, door locks fixing & wardrobe assembly.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Tariq Mahmood" data-category="Master Carpenter" data-price="RS 1400/hr"
+                  data-location="Rawalpindi" data-exp="10+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -392,14 +375,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Precision Tools</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Modular Fitting Pro</li>
               </ul>
-              <button type="button" onclick="localStorage.setItem('qs_selected_provider', JSON.stringify({name:'Tariq Mahmood', category:'Master Carpenter', price:'RS 1400/hr', location:'Rawalpindi', exp:'10+ Yrs', avatar:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop'})); window.location.href='bookservice.html';" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Tariq Mahmood" data-category="Master Carpenter" data-price="RS 1400/hr"
+                data-location="Rawalpindi" data-exp="10+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 6. Appliance Repair -->
+    <!-- Card 6: Zubair Malik -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -424,7 +410,11 @@
               <p class="qs-short-desc">Washing machine PCB, refrigerator cooling, and microwave fixing.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-<button type="button" onclick="localStorage.setItem('qs_selected_provider', JSON.stringify({name:'Zubair Malik', category:'Appliance Technician', price:'RS 1600/hr', location:'Karachi', exp:'7+ Yrs', avatar:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop'})); window.location.href='bookservice.html';" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>              </div>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Zubair Malik" data-category="Appliance Technician" data-price="RS 1600/hr"
+                  data-location="Karachi" data-exp="7+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop">Book Now</button>
+              </div>
             </div>
           </div>
           <div class="qs-card-back">
@@ -439,14 +429,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Original Spare Parts</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Quick On-site Repair</li>
               </ul>
-              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Zubair Malik" data-category="Appliance Technician" data-price="RS 1600/hr"
+                data-location="Karachi" data-exp="7+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 7. Solar & UPS Specialist -->
+    <!-- Card 7: Hamza Siddiqui -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -470,7 +463,10 @@
               <p class="qs-short-desc">Solar panel installation, hybrid inverter setup & battery maintenance.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Hamza Siddiqui" data-category="Solar System Engineer" data-price="RS 2500/hr"
+                  data-location="Multan" data-exp="5+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -486,13 +482,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Net Metering Certified</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Free Solar Audit</li>
               </ul>
-       <button type="button" onclick="localStorage.setItem('qs_selected_provider', JSON.stringify({name:'Hamza Siddiqui', category:'Solar System Engineer', price:'RS 2500/hr', location:'Multan', exp:'5+ Yrs', avatar:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300&auto=format&fit=crop'})); window.location.href='bookservice.html';" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>     </div>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Hamza Siddiqui" data-category="Solar System Engineer" data-price="RS 2500/hr"
+                data-location="Multan" data-exp="5+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300&auto=format&fit=crop">Book Service</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 8. Commercial Painter -->
+    <!-- Card 8: Rashid Javed -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -516,7 +516,11 @@
               <p class="qs-short-desc">Wall texture paint, dampness protection treatment & polishing.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-<button type="button" onclick="localStorage.setItem('qs_selected_provider', JSON.stringify({name:'Rashid Javed', category:'Interior Painter', price:'RS 1100/hr', location:'Peshawar', exp:'9+ Yrs', avatar:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300&auto=format&fit=crop'})); window.location.href='bookservice.html';" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>              </div>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Rashid Javed" data-category="Interior Painter" data-price="RS 1100/hr"
+                  data-location="Peshawar" data-exp="9+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300&auto=format&fit=crop">Book Now</button>
+              </div>
             </div>
           </div>
           <div class="qs-card-back">
@@ -531,14 +535,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Dust-Free Painting</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Waterproofing Guarantee</li>
               </ul>
-              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Rashid Javed" data-category="Interior Painter" data-price="RS 1100/hr"
+                data-location="Peshawar" data-exp="9+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 9. CCTV Security Expert -->
+    <!-- Card 9: Fahad Sheikh -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -563,7 +570,10 @@
               <p class="qs-short-desc">IP camera installation, DVR networking & mobile view setup.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Fahad Sheikh" data-category="CCTV Security Technician" data-price="RS 1800/hr"
+                  data-location="Karachi" data-exp="6+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -579,15 +589,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Hikvision & Dahua Certified</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Remote App Access Setup</li>
               </ul>
-              <button type="button" 
-              onclick="handleBookClick('Fahad Sheikh', 'CCTV Security Technician', 'RS 1800/hr', 'Karachi', '6+ Yrs', 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=300&auto=format&fit=crop')"class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Fahad Sheikh" data-category="CCTV Security Technician" data-price="RS 1800/hr"
+                data-location="Karachi" data-exp="6+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 10. Handyman & Repairs -->
+    <!-- Card 10: Imran Shah -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -611,7 +623,10 @@
               <p class="qs-short-desc">TV wall mounting, curtain rod fittings & small home fixes.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Imran Shah" data-category="General Handyman" data-price="RS 900/hr"
+                  data-location="Faisalabad" data-exp="3+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -627,16 +642,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>All-in-One Equipment</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Quick Hourly Billing</li>
               </ul>
-              <button type="button" 
-              onclick="handleBookClick('Imran Shah', 'General Handyman', 'RS 900/hr', 'Faisalabad', '3+ Yrs', 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop')"
-              class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Imran Shah" data-category="General Handyman" data-price="RS 900/hr"
+                data-location="Faisalabad" data-exp="3+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 11. Generator Technician -->
+    <!-- Card 11: Nabeel Baig -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -661,7 +677,10 @@
               <p class="qs-short-desc">Gas & Diesel generator servicing, ATS panel repair & tuning.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Nabeel Baig" data-category="Generator Engineer" data-price="RS 2200/hr"
+                  data-location="Hyderabad" data-exp="8+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -677,16 +696,17 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>ATS Switch Conversion</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Emergency Callout</li>
               </ul>
-              <button type="button" 
-              onclick="handleBookClick('Nabeel Baig', 'Generator Engineer', 'RS 2200/hr', 'Hyderabad', '8+ Yrs', 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=300&auto=format&fit=crop')"
-              class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Nabeel Baig" data-category="Generator Engineer" data-price="RS 2200/hr"
+                data-location="Hyderabad" data-exp="8+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 12. Water Tank Sanitization -->
+    <!-- Card 12: Kashif Ali -->
     <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center">
       <div class="qs-flip-card">
         <div class="qs-card-inner">
@@ -710,7 +730,10 @@
               <p class="qs-short-desc">Underground & overhead tank chemical washing & anti-bacterial spray.</p>
               <div class="qs-card-footer mt-auto pt-2 d-flex justify-content-between align-items-center">
                 <span class="qs-hover-hint text-muted"><i class="bi bi-arrow-repeat me-1"></i>Hover to flip</span>
-                <button type="button" class="btn btn-orange-pill btn-sm">View Profile</button>
+                <button type="button" class="btn btn-orange-pill btn-sm qs-book-btn"
+                  data-name="Kashif Ali" data-category="Water Tank Cleaner" data-price="RS 1300/hr"
+                  data-location="Karachi" data-exp="5+ Yrs"
+                  data-avatar="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=300&auto=format&fit=crop">Book Now</button>
               </div>
             </div>
           </div>
@@ -726,9 +749,10 @@
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>High Pressure Cleaning</li>
                 <li><i class="bi bi-check-circle-fill text-orange me-2"></i>Safe Chlorine Treatment</li>
               </ul>
-              <button type="button"
-              onclick="handleBookClick('Kashif Ali', 'Water Tank Cleaner', 'RS 1300/hr', 'Karachi', '5+ Yrs', 'https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=300&auto=format&fit=crop')"
-               class="btn btn-orange-pill w-100 py-2 shadow-orange">Book Service</button>
+              <button type="button" class="btn btn-orange-pill w-100 py-2 shadow-orange qs-book-btn"
+                data-name="Kashif Ali" data-category="Water Tank Cleaner" data-price="RS 1300/hr"
+                data-location="Karachi" data-exp="5+ Yrs"
+                data-avatar="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=300&auto=format&fit=crop">Book Service</button>
             </div>
           </div>
         </div>
@@ -738,23 +762,8 @@
   </div>
 </div>
 
-
-
-
-
-<!-- card end -->
-
-
-
-
-
-<!-- footer -->
-
-<!-- SITE FOOTER WITH HERO SLIDER THEME BACKGROUND -->
 <footer class="site-footer mt-5">
   <div class="container py-5">
-    
-    <!-- TOP STAKEHOLDERS STRIP -->
     <div class="stakeholders-strip pb-4 mb-4 border-bottom border-secondary border-opacity-25 d-flex flex-wrap align-items-center justify-content-between gap-3">
       <div class="stakeholder-badge text-orange fw-bold d-flex align-items-center gap-2">
         <i class="bi bi-shield-check fs-5"></i>
@@ -776,10 +785,7 @@
       </div>
     </div>
 
-    <!-- MAIN FOOTER CONTENT -->
     <div class="row g-4 align-items-start">
-
-      <!-- Col 1: Brand Info -->
       <div class="col-lg-3 col-md-6">
         <a href="./index.html" class="brand-logo-container mb-3 text-decoration-none d-inline-flex align-items-center gap-2">
           <div class="brand-icon-box">
@@ -799,7 +805,6 @@
         </div>
       </div>
 
-      <!-- Col 2: Quick Links -->
       <div class="col-lg-2 col-md-6">
         <h5 class="col-title mb-3">Quick Links</h5>
         <ul class="footer-links list-unstyled m-0">
@@ -811,7 +816,6 @@
         </ul>
       </div>
 
-      <!-- Col 3: Popular Services -->
       <div class="col-lg-2 col-md-6">
         <h5 class="col-title mb-3">Top Services</h5>
         <ul class="footer-links list-unstyled m-0">
@@ -823,11 +827,8 @@
         </ul>
       </div>
 
-      <!-- Col 4: COMPACT FILTER BAR & SOCIALS (AS PER IMAGE 3) -->
       <div class="col-lg-5 col-md-6">
         <h5 class="col-title mb-3">Quick Service Search</h5>
-        
-        <!-- Compact Search & Category Pill -->
         <div class="compact-filter-bar d-flex align-items-center gap-2 mb-3">
           <select class="form-select compact-select">
             <option value="all">All Categories</option>
@@ -840,7 +841,6 @@
             Search
           </button>
         </div>
-
         <div class="footer-socials d-flex gap-2 align-items-center">
           <span class="text-muted small me-2">Follow Us:</span>
           <a href="#" class="social-icon" title="Facebook"><i class="bi bi-facebook"></i></a>
@@ -849,10 +849,8 @@
           <a href="#" class="social-icon" title="GitHub"><i class="bi bi-github"></i></a>
         </div>
       </div>
-
     </div>
 
-    <!-- FOOTER BOTTOM -->
     <div class="footer-bottom pt-4 mt-4 border-top border-secondary border-opacity-25 d-flex flex-wrap justify-content-between align-items-center gap-2">
       <p class="mb-0 text-muted small">&copy; 2026 <strong>QuickServe On-Demand Services</strong>. All Rights Reserved.</p>
       <div class="legal-links small">
@@ -861,25 +859,32 @@
         <a href="#" class="text-muted text-decoration-none">Terms of Service</a>
       </div>
     </div>
-
   </div>
 </footer>
 
-<!-- BACK TO TOP ARROW BUTTON -->
 <button id="backToTopBtn" title="Go to top">
   <i class="bi bi-arrow-up"></i>
 </button>
 
-
     </main>
 
-    <!-- GSAP Library (Animation ke liye Lazmi Hai) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-     <script type="module" src="./auth-state.js"></script>
-     <script src="./bookservice.js"></script>
+
+    <!--
+      IMPORTANT FIX:
+      - Purani inline "handleBookClick" script yahan se hata di gai hai — wo index.js
+        wali definition ke sath TAKRA (conflict) rahi thi.
+      - "bookservice.js" ko yahan (index.html) load bhi NAHI karna chahiye, kyunke
+        wo file "import ... from ./config.js" use karti hai jo sirf type="module"
+        script mein chalta hai. Yahan normal <script> tag mein load karne se
+        browser console mein "Cannot use import statement outside a module" error
+        aata tha aur booking flow break ho jata tha.
+      - Ab sirf index.js hi booking button ka kaam sambhalta hai (event delegation
+        ke zariye), jo har card ka "Book Now" / "Book Service" button data-* attributes
+        se parhta hai aur us card ki service image bhi automatically utha leta hai.
+    -->
+    <script type="module" src="./auth-state.js"></script>
     <script src="./index.js"></script>
 </body>
 </html>

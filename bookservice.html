@@ -25,7 +25,7 @@
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        
+
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="fw-bold text-white mb-0">Confirm Your Booking</h2>
@@ -34,24 +34,41 @@
           </a>
         </div>
 
-        <!-- Selected Provider Details Card -->
-        <div class="card qs-booking-card p-4 mb-4 border-orange">
-          <div class="d-flex align-items-center flex-wrap gap-3">
-            <img id="prov-avatar" src="https://via.placeholder.com/100" class="qs-provider-img rounded-circle" alt="Provider Avatar">
-            <div class="flex-grow-1">
-              <span class="badge bg-orange mb-1" id="prov-category">Category</span>
-              <h3 class="h4 fw-bold text-white mb-1" id="prov-name">Provider Name</h3>
-              <p class="text-secondary small mb-1">
-                <i class="bi bi-geo-alt-fill text-orange me-1"></i><span id="prov-location">Location</span> | 
-                <i class="bi bi-award-fill text-orange mx-1"></i><span id="prov-exp">Experience</span>
-              </p>
-              <div class="text-warning small" id="prov-rating">
-                <i class="bi bi-star-fill"></i> 4.8
+        <!--
+          FIX: pehle sirf provider ki round avatar image thi.
+          "Service image" (card ke upar wali banner photo, e.g. wiring/pipes/etc)
+          kahin bhi show nahi hoti thi kyunke wo data booking page tak bheji hi
+          nahi jati thi. Ab neeche ek banner <img id="prov-service-img"> add ki
+          gai hai jise bookservice.js populate karta hai.
+        -->
+        <div class="card qs-booking-card border-orange mb-4 overflow-hidden p-0">
+          <img id="prov-service-img"
+               src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=900&auto=format&fit=crop"
+               alt="Selected Service"
+               class="w-100"
+               style="max-height: 220px; object-fit: cover;">
+
+          <div class="p-4">
+            <div class="d-flex align-items-center flex-wrap gap-3">
+              <!-- Provider avatar with safe fallback -->
+              <img id="prov-avatar" src="https://ui-avatars.com/api/?name=Provider&background=ff6600&color=fff"
+                   onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Provider&background=ff6600&color=fff';"
+                   class="qs-provider-img rounded-circle" alt="Provider Avatar" width="100" height="100" style="object-fit: cover;">
+              <div class="flex-grow-1">
+                <span class="badge bg-orange mb-1" id="prov-category">Category</span>
+                <h3 class="h4 fw-bold text-white mb-1" id="prov-name">Provider Name</h3>
+                <p class="text-secondary small mb-1">
+                  <i class="bi bi-geo-alt-fill text-orange me-1"></i><span id="prov-location">Location</span> |
+                  <i class="bi bi-award-fill text-orange mx-1"></i><span id="prov-exp">Experience</span>
+                </p>
+                <div class="text-warning small" id="prov-rating">
+                  <i class="bi bi-star-fill"></i> 4.8
+                </div>
               </div>
-            </div>
-            <div class="text-end ms-auto">
-              <span class="text-secondary d-block small">Hourly Rate</span>
-              <span class="fs-4 fw-bold text-orange" id="prov-price">RS 0/hr</span>
+              <div class="text-end ms-auto">
+                <span class="text-secondary d-block small">Hourly Rate</span>
+                <span class="fs-4 fw-bold text-orange" id="prov-price">RS 0/hr</span>
+              </div>
             </div>
           </div>
         </div>
@@ -60,13 +77,14 @@
         <div class="card qs-booking-card p-4">
           <form id="bookingForm" novalidate>
             <div class="row g-3">
-              
-              <!-- Service Name (Readonly) -->
-              <div class="col-md-6">
-                <label for="serviceCategory" class="form-label text-light fw-semibold">Service Type</label>
-                <input type="text" class="form-control qs-input" id="serviceCategory" readonly>
-              </div>
 
+              <!-- Service Name (Readonly) -->
+              <!-- Is Line Ko Replace Karein -->
+<div class="col-md-6">
+  <label for="serviceCategory" class="form-label text-light fw-semibold">Service Type</label>
+  <input type="text" class="form-control qs-input" id="serviceCategory" required placeholder="Service Name">
+  <div class="invalid-feedback">Service type is required.</div>
+</div>
               <!-- Date Selection -->
               <div class="col-md-6">
                 <label for="bookingDate" class="form-label text-light fw-semibold">Select Date *</label>
@@ -121,6 +139,6 @@
     </div>
   </div>
 
-  <script src="./bookservice.js"></script>
+  <script type="module" src="./bookservice.js"></script>
 </body>
 </html>

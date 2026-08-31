@@ -1,36 +1,39 @@
-// Function to trigger booking page with provider parameters from index.html cards
-function handleBookClick(name, category, price, location, exp, avatar) {
-  const providerData = {
-    name: name,
-    category: category,
-    price: price,
-    location: location,
-    exp: exp,
-    avatar: avatar
-  };
-  
-  // Save selected provider in localStorage to transfer data between pages
-  localStorage.setItem('qs_selected_provider', JSON.stringify(providerData));
-  
-  // Redirect to bookservice.html
-  window.location.href = 'bookservice.html';
-}
+import {
+  auth,
+  db,
+  collection,
+  addDoc,
+  serverTimestamp
+   
+} from "./config.js";
+
+
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+const PROVIDER_EMAIL = "asiyadavjani@gmail.com";
+
+let currentUser = null;
+let authReady = false;
+
+// Active User Observer
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  authReady = true;
+});
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Service Category aur Provider Card Info Fill karein
+  loadSelectedProvider();
+
   const bookingForm = document.getElementById('bookingForm');
+  const datePicker = document.getElementById('bookingDate');
+
+  if (datePicker) {
+    datePicker.min = new Date().toISOString().split('T')[0];
+  }
 
   if (bookingForm) {
-    // 1. Load details of selected provider
-    loadSelectedProvider();
-
-    // 2. Set min date to Today (Customer cannot pick past dates)
-    const datePicker = document.getElementById('bookingDate');
-    if (datePicker) {
-      datePicker.min = new Date().toISOString().split('T')[0];
-    }
-
-    // 3. Form Validation & Submission Logic
-    bookingForm.addEventListener('submit', (e) => {
+    bookingForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       if (!bookingForm.checkValidity()) {
@@ -39,67 +42,112 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      submitBookingRequest();
+      await submitBookingRequest();
     });
   }
 });
 
-// Load Provider Info into UI
+// URL aur LocalStorage Data Read
 function loadSelectedProvider() {
-  const data = JSON.parse(localStorage.getItem('qs_selected_provider'));
+  const urlParams = new URLSearchParams(window.location.search);
+  const localData = JSON.parse(localStorage.getItem('qs_selected_provider')) || {};
 
-  // Default fallback if opened directly
-  const provider = data || {
-    name: "Ali Raza",
-    category: "Master Electrician",
-    price: "RS 1500/hr",
-    location: "Karachi",
-    exp: "6+ Yrs",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop"
-  };
+  const category = urlParams.get('category') || urlParams.get('service') || localData.category || "General Service";
+  const name = urlParams.get('name') || localData.name || "Provider Name";
+  const price = urlParams.get('price') || localData.price || "RS 1500/hr";
+  const location = urlParams.get('location') || localData.location || "Karachi";
+  const exp = urlParams.get('exp') || localData.exp || "5+ Yrs";
 
-  document.getElementById('prov-name').innerText = provider.name;
-  document.getElementById('prov-category').innerText = provider.category;
-  document.getElementById('prov-price').innerText = provider.price;
-  document.getElementById('prov-location').innerText = provider.location;
-  document.getElementById('prov-exp').innerText = provider.exp;
-  document.getElementById('prov-avatar').src = provider.avatar;
-  
-  // Set readonly input value
-  document.getElementById('serviceCategory').value = provider.category;
+  // Service Type Input Auto-Fill
+  const serviceInput = document.getElementById('serviceCategory');
+  if (serviceInput) {
+    serviceInput.value = category;
+  }
+
+  // Display UI Updates
+  setText('prov-name', name);
+  setText('prov-category', category);
+  setText('prov-price', price);
+  setText('prov-location', location);
+  setText('prov-exp', exp);
 }
 
-// Generate Unique Booking ID (e.g. QS-74892)
-function generateBookingID() {
-  return 'QS-' + Math.floor(10000 + Math.random() * 90000);
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = value;
 }
 
-// Process and save booking data with state management
-function submitBookingRequest() {
-  const provider = JSON.parse(localStorage.getItem('qs_selected_provider')) || {};
+// Save Booking Logic
+async function submitBookingRequest() {
+  const submitBtn = document.querySelector('#bookingForm button[type="submit"]');
 
-  const newBooking = {
-    bookingId: generateBookingID(), // Business Rule: Unique ID
-    providerName: provider.name || "Assigned Provider",
-    category: document.getElementById('serviceCategory').value,
+  if (!authReady) {
+    await new Promise((resolve) => {
+      const unsub = onAuthStateChanged(auth, () => {
+        unsub();
+        resolve();
+      });
+    });
+  }
+
+  const user = currentUser || auth.currentUser;
+
+  if (!user) {
+    alert("Booking Submit karne ke liye Login hona zaroori hai.");
+    window.location.href = './login.html';
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving Booking...';
+  }
+
+  const serviceCategoryVal = document.getElementById('serviceCategory')?.value || "General Service";
+
+  const bookingData = {
+    bookingId: 'QS-' + Math.floor(10000 + Math.random() * 90000),
+    service: serviceCategoryVal,
+    category: serviceCategoryVal,
+    providerName: document.getElementById('prov-name')?.innerText || "Assigned Provider",
     date: document.getElementById('bookingDate').value,
     time: document.getElementById('bookingTime').value,
     city: document.getElementById('customerCity').value,
     address: document.getElementById('serviceAddress').value,
     description: document.getElementById('serviceDescription').value,
-    status: 'Pending', // Initial status required by Hackathon Workflow
-    rating: null,
-    review: null,
-    createdAt: new Date().toLocaleString()
+    status: 'pending',
+
+    // Customer ID Fields for Dashboard Display
+    userId: user.uid,
+    customerId: user.uid,
+    userEmail: user.email,
+    customerEmail: user.email,
+    customerName: user.displayName || user.email.split('@')[0],
+    providerEmail: PROVIDER_EMAIL,
+
+    createdAt: serverTimestamp()
   };
 
-  // Business Rule: Data persistence (localStorage or Firebase sync)
-  let existingBookings = JSON.parse(localStorage.getItem('quickserve_bookings')) || [];
-  existingBookings.push(newBooking);
-  localStorage.setItem('quickserve_bookings', JSON.stringify(existingBookings));
+  try {
+    // 1. Firebase Firestore Save
+    await addDoc(collection(db, "bookings"), bookingData);
 
-  alert(`Booking Successfully Placed!\nBooking ID: ${newBooking.bookingId}`);
-  
-  // Redirect to Customer Dashboard to track status
-  window.location.href = 'customer-dashboard.html';
+    // 2. LocalStorage Sync Backup
+    const localEntry = { ...bookingData, createdAt: new Date().toISOString() };
+    let localBookings = JSON.parse(localStorage.getItem('quickserve_bookings')) || [];
+    localBookings.push(localEntry);
+    localStorage.setItem('quickserve_bookings', JSON.stringify(localBookings));
+
+    alert(`Booking Confirm Ho Gayi!\nBooking ID: ${bookingData.bookingId}`);
+    window.location.href = './customer-dashboard.html';
+
+  } catch (error) {
+    console.error("Booking Error:", error);
+    alert("Booking process me error aaya: " + error.message);
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Confirm & Submit Booking';
+    }
+  }
 }

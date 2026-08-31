@@ -1,0 +1,170 @@
+/* ==========================================================
+   auth.css — Styles for Login / Signup / Auth pages
+   Uses the CSS variables defined in style.css (:root)
+   ========================================================== */
+
+.auth-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-dark);
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-dark);
+  padding: 2rem 1.75rem;
+  position: relative;
+}
+
+/* ---- Back to home button ---- */
+.btn-back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-body);
+  font-size: 0.85rem;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  transition: color 0.2s ease;
+}
+.btn-back-home:hover {
+  color: var(--brand-orange);
+}
+
+/* ---- Header / brand ---- */
+.auth-header {
+  margin-bottom: 1.5rem;
+}
+.brand-title {
+  color: var(--text-main);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+.brand-title span {
+  color: var(--brand-orange);
+}
+
+/* ---- Inputs ---- */
+.auth-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+}
+.auth-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.auth-input:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--brand-orange);
+  color: var(--text-main);
+  box-shadow: 0 0 0 0.2rem var(--orange-glow-light);
+  outline: none;
+}
+
+/* Firefox / autofill background fix */
+.auth-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.04) inset;
+  -webkit-text-fill-color: var(--text-main);
+}
+
+select.auth-input option {
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* ---- Primary CTA button ---- */
+.btn-orange-glow {
+  background: var(--brand-orange);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.btn-orange-glow:hover {
+  background: var(--brand-orange-hover);
+  box-shadow: var(--shadow-glow);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.btn-orange-glow:active {
+  background: var(--brand-orange-dark);
+  transform: translateY(0);
+}
+.btn-orange-glow:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---- Google button ---- */
+.btn-google {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 10px;
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.btn-google:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-main);
+}
+
+/* ---- Divider ("OR") ---- */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-body);
+  font-size: 0.75rem;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--glass-border);
+}
+.auth-divider span {
+  padding: 0 0.75rem;
+}
+
+/* ---- Footer / link back to login or signup ---- */
+.auth-footer {
+  color: var(--text-body);
+}
+.auth-link {
+  color: var(--brand-orange);
+  text-decoration: none;
+  font-weight: 600;
+}
+.auth-link:hover {
+  color: var(--brand-orange-hover);
+  text-decoration: underline;
+}
+
+/* ---- Labels ---- */
+.auth-card .form-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
+  }
+}
